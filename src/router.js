@@ -3,6 +3,7 @@
 
 import HomeComponent from './views/HomeComponent.vue'
 import LoginComponent from './views/LoginComponent.vue'
+import SiteComponent from './views/SiteComponent.vue'
 
 // import { createRouter, createWebHashHistory } from 'vue-router' //Importando a função createRouter.
 
@@ -16,6 +17,10 @@ const routes = [ //Criação de todas as rotas do Vue Router.
     {
         path: '/login', //localhost:8080/login
         component: LoginComponent
+    },
+    {
+        path: '/', //localhost:8080/
+        component: SiteComponent
     }
 ]
 
