@@ -37,15 +37,22 @@
     export default {
         methods:{
             navegarPara(){
-                this.$router.replace('/home'); //Replace substituir as rotas, sem criar um histórico de navegação. Ele modifica a URL atual.
+                // this.$router.replace('/home'); //Replace substituir as rotas, sem criar um histórico de navegação. Ele modifica a URL atual.
                 // this.$router.replace({path: '/home'}); //Outra forma de definir o replace
 
-                console.log(this.$router); //Objeto de rastreamento
-                // this.$router.push('/home'); //Adicionar uma entrada ao histórico de rotas do navegador.
+                // console.log(this.$router); //Objeto de rastreamento
+                this.$router.push('/home'); //Adicionar uma entrada ao histórico de rotas do navegador.
 
                 //Após o disparo do evento ao clicar em login, você é enviado para rota '/home'.
 
                 // this.$router.push({path: '/home'}); //Outra forma de definir uma navegação diferente de this.$router.push('/home');
+            
+                // this.$router.forward() //Permite avançar no historico de rotas do navegador.
+
+                // this.$router.back() //Permite retroceder no historico de rotas do navegador.
+
+                //No caso abaixo ele vai, avançar 2 passos para (valores positivos) ou retroceder 2 passos para (valores negativos).
+                // this.$router.go(2); //Avançar ou retornar no historico de rotas do navegador.
             }
         }
     }
