@@ -1,6 +1,10 @@
 //Melhor criar um script a parte ao invés de usar no main.js, para que conforme a nossa aplicação vai crescendo, maior o código.
 //Para facilitar a manutenção criamos um outro script para trazer as configurações e conforme o sistema cresce conseguimos organizar.
 
+import ContratosComponent from './components/vendas/ContratosComponent.vue'
+import LeadsComponent from './components/vendas/LeadsComponent.vue'
+import ServicosComponent from './components/servicos/ServicosComponent.vue'
+import VendasComponent from './components/vendas/VendasComponent.vue'
 import HomeComponent from './views/HomeComponent.vue'
 import LoginComponent from './views/LoginComponent.vue'
 import SiteComponent from './views/SiteComponent.vue'
@@ -12,7 +16,15 @@ import { createRouter, createWebHistory } from 'vue-router' //Testando com o cre
 const routes = [ //Criação de todas as rotas do Vue Router.
     {
         path: '/home', //Caminho para o componente 'HomeComponent' é acessado por /home. localhost:8080/home
-        component: HomeComponent
+        component: HomeComponent,
+        children:[ //Criação de rotas alinhadas. (Rotas filhas).
+            {path: 'vendas', component: VendasComponent, children:[ //localhost:8080/home/vendas
+                {path: 'leads', component: LeadsComponent}, //localhost:8080/home/vendas/leads
+                {path: 'contratos', component: ContratosComponent} //localhost:8080/home/vendas/contratos
+            ]}, 
+            {path: 'servicos', component: ServicosComponent} //localhost:8080/home/servicos
+            //ATENÇÃO: Acima para rotas filhas não é usado a barra isto é IMPORTANTE.
+        ]
     },
     {
         path: '/login', //localhost:8080/login
