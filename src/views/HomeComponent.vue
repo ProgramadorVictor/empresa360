@@ -63,5 +63,22 @@
     border-top: none;
     border-right: none;
 }
+/*
+    .router-link-active, router-link-exact-active //Ambos são usados para estilização da navegação.
+    
+    router-link-active, pega o prefixo '/home/vendas' e todos os outros subordinados desses são aplicados o efeito css.
+*/
+
+/* .router-link-active {
+    color: white;
+    background-color: #0d6efd !important;
+    border-color: #0d6efd;
+} */
+
+.router-link-exact-active {
+    color: white !important;
+    background-color: #0d6efd !important;
+    border-color: #0d6efd;
+}
 
 </style>
