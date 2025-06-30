@@ -15,19 +15,19 @@
 
         <div class="d-flex">
             <div class="list-group menu-esquerda">
-                <router-link class="list-group-item list-group-item-action" to="/home">
+                <router-link class="list-group-item list-group-item-action" to="/home" exact-active-class="active">
                     <i class="bi bi-speedometer2"></i>Dashboard
                 </router-link>
-                <router-link class="list-group-item list-group-item-action" to="/home/vendas">
+                <router-link class="list-group-item list-group-item-action" to="/home/vendas" exact-active-class="active">
                     <i class="bi bi-cart"></i>Vendas
                 </router-link>
-                <router-link class="list-group-item list-group-item-action" to="/home/vendas/leads">
+                <router-link class="list-group-item list-group-item-action" to="/home/vendas/leads" exact-active-class="active">
                     <i class="bi bi-caret-right"></i>Leads
                 </router-link>
-                <router-link class="list-group-item list-group-item-action" to="/home/vendas/contratos">
+                <router-link class="list-group-item list-group-item-action" to="/home/vendas/contratos" exact-active-class="active">
                     <i class="bi bi-caret-right"></i>Contratos
                 </router-link>
-                <router-link class="list-group-item list-group-item-action" to="/home/servicos">
+                <router-link class="list-group-item list-group-item-action" to="/home/servicos" exact-active-class="active">
                     <i class="bi bi-card-checklist"></i>Serviços
                 </router-link>
             </div>
@@ -76,9 +76,15 @@
 } */
 
 .router-link-exact-active {
-    color: white !important;
+    color: white;
     background-color: #0d6efd !important;
     border-color: #0d6efd;
 }
 
+.ativo{
+    color: white ;
+    background-color: red;
+    border-color: red;
+}
+/* Ficar atento a correspondência inclusiva e correspondência exata. */
 </style>
