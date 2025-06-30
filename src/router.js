@@ -12,6 +12,7 @@ import SiteComponent from './views/SiteComponent.vue'
 // import { createRouter, createWebHashHistory } from 'vue-router' //Importando a função createRouter.
 
 import { createRouter, createWebHistory } from 'vue-router' //Testando com o createWebHistory
+import DashboardComponent from './components/dashboard/DashboardComponent.vue'
 
 const routes = [ //Criação de todas as rotas do Vue Router.
     {
@@ -22,7 +23,8 @@ const routes = [ //Criação de todas as rotas do Vue Router.
                 {path: 'leads', component: LeadsComponent}, //localhost:8080/home/vendas/leads
                 {path: 'contratos', component: ContratosComponent} //localhost:8080/home/vendas/contratos
             ]}, 
-            {path: 'servicos', component: ServicosComponent} //localhost:8080/home/servicos
+            {path: 'servicos', component: ServicosComponent}, //localhost:8080/home/servicos
+            {path: 'dashboard', component: DashboardComponent} //localhost:8080/home/dashboard
             //ATENÇÃO: Acima para rotas filhas não é usado a barra isto é IMPORTANTE.
         ]
     },
