@@ -6,6 +6,13 @@
   npm install -g json-server@v0.17.0 -E //Somente instalação do json-server
   json-server -h
 */
+
+/*
+  Representação de um back-end fake aula 232.
+
+  Este comando abaixo executa um servidor local back-end fake baseado no que está dentro do arquivo
+  json-server --watch json-server.json
+*/
 export default {
   name: 'App'
 }
