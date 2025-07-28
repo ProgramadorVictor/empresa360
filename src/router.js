@@ -8,6 +8,7 @@ import VendasComponent from './components/vendas/VendasComponent.vue'
 import HomeComponent from './views/HomeComponent.vue'
 import LoginComponent from './views/LoginComponent.vue'
 import SiteComponent from './views/SiteComponent.vue'
+import LeadComponent from './components/vendas/LeadComponent.vue'
 
 // import { createRouter, createWebHashHistory } from 'vue-router' //Importando a função createRouter.
 
@@ -21,6 +22,7 @@ const routes = [ //Criação de todas as rotas do Vue Router.
         children:[ //Criação de rotas alinhadas. (Rotas filhas).
             {path: 'vendas', component: VendasComponent, children:[ //localhost:8080/home/vendas
                 {path: 'leads', component: LeadsComponent}, //localhost:8080/home/vendas/leads
+                {path: 'leads/:id', component: LeadComponent}, //localhost:8080/home/vendas/leads/id //Utilizando segmento dinâmico, correspondência dinâmica de rota.
                 {path: 'contratos', component: ContratosComponent} //localhost:8080/home/vendas/contratos
             ]}, 
             {path: 'servicos', component: ServicosComponent}, //localhost:8080/home/servicos
