@@ -4,7 +4,7 @@
 <script>
 /*
   npm install -g json-server@v0.17.0 -E //Somente instalação do json-server
-  json-server -h
+  json-server -h //Mostra todos os comandos disponiveis para esta lib.
 */
 
 /*

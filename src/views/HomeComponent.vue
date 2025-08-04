@@ -87,4 +87,5 @@
     border-color: red;
 }
 /* Ficar atento a correspondência inclusiva e correspondência exata. */
+/* Correspodência inclusiva e exata são formas de estilizar um menu, onde a exata indica exatamente aquela aba ou sub-abas, e a inclusiva estilizar para aba e sub-abas todas estilizadas. */
 </style>
