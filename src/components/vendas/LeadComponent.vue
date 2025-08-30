@@ -25,23 +25,12 @@
     </div>
 </template>
 <script>
+    import apiMixin from '@/mixins/ApiMixin.js'; //Chamando o objeto mixin, com a requisição de api, configurada no objeto .js
     export default {
-        data: () => ({
-            dados: ''
-        }),
-        methods:{
-            getDadosApi(){
-                let url = `http://localhost:3000/leads/${this.$route.params.id}`
-                fetch(url)
-                    .then(response => response.json())
-                    .then(response => {
-                        this.dados = response
-                    })
-            }
-        },
+        mixins: [apiMixin],
         created(){
             console.log(this.$route); //Objeto de configuração da rota.
-            this.getDadosApi();
+            this.getDadosApi(`http://localhost:3000/leads/${this.$route.params.id}`);
         },
     }
 </script>
