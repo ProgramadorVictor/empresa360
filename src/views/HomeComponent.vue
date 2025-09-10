@@ -15,19 +15,20 @@
 
         <div class="d-flex">
             <div class="list-group menu-esquerda">
-                <router-link class="list-group-item list-group-item-action" to="/home/dashboard" exact-active-class="active">
+                <!-- router-link é uma tag simples como se fosse um link da tag <a> -->
+                <router-link class="list-group-item list-group-item-action" to="/home/dashboard" active-class="active">
                     <i class="bi bi-speedometer2"></i>Dashboard
                 </router-link>
-                <router-link class="list-group-item list-group-item-action" to="/home/vendas" exact-active-class="active">
+                <router-link class="list-group-item list-group-item-action" to="/home/vendas" active-class="active">
                     <i class="bi bi-cart"></i>Vendas
                 </router-link>
-                <router-link class="list-group-item list-group-item-action" to="/home/vendas/leads" exact-active-class="active">
+                <router-link class="list-group-item list-group-item-action" to="/home/vendas/leads" active-class="active">
                     <i class="bi bi-caret-right"></i>Leads
                 </router-link>
-                <router-link class="list-group-item list-group-item-action" to="/home/vendas/contratos" exact-active-class="active">
+                <router-link class="list-group-item list-group-item-action" to="/home/vendas/contratos" active-class="active">
                     <i class="bi bi-caret-right"></i>Contratos
                 </router-link>
-                <router-link class="list-group-item list-group-item-action" to="/home/servicos" exact-active-class="active">
+                <router-link class="list-group-item list-group-item-action" to="/home/servicos" active-class="active">
                     <i class="bi bi-card-checklist"></i>Serviços
                 </router-link>
             </div>
@@ -69,17 +70,22 @@
     router-link-active, pega o prefixo '/home/vendas' e todos os outros subordinados desses são aplicados o efeito css.
 */
 
-/* .router-link-active {
+
+/* Este abaixo é para a correspondência inclsuiva de estilização de rotas*/
+/* Para configuração deste utiliza-se active-class="active" */
+.router-link-active { 
     color: white;
-    background-color: #0d6efd !important;
+    background-color: #3b89ff;
+    border-color: #3b89ff;
+}
+
+/* Este é para a correspondência exata de estilização de rotas*/
+/* Para configuração deste utiliza-se exact-active-class="active" */
+/* .router-link-exact-active { 
+    color: white;
+    background-color: #0d6efd;
     border-color: #0d6efd;
 } */
-
-.router-link-exact-active {
-    color: white;
-    background-color: #0d6efd !important;
-    border-color: #0d6efd;
-}
 
 .ativo{
     color: white ;

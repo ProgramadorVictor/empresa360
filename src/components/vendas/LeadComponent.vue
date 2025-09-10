@@ -29,7 +29,7 @@
     export default {
         mixins: [apiMixin],
         created(){
-            console.log(this.$route); //Objeto de configuração da rota.
+            console.log(this.$route); //Objeto de configuração da rota. Verificando os dados da rota ativada no momento
             this.getDadosApi(`http://localhost:3000/leads/${this.$route.params.id}`);
         },
     }

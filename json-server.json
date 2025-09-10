@@ -1,6 +1,9 @@
 {
-	"commands": [
-		"json-server --watch json-server.json"
+	"info": [
+		{ "id": 1, "tip": "json-server --watch json-server.json", "desc": "Este comando serve para inicializar o back-end fake da aplicação."},
+		{ "id": 2, "tip": "https://github.com/typicode/json-server", "desc": "Este é o site para mais informações sobre o projeto json-server"},
+		{ "id": 3, "tip": "npm i -g json-server", "desc": "Instalando o json-server de forma global, para ser executada em qualquer lugar do computador."}
+		
 	],
 	"leads": [
 		{ "id": 1, "nome": "Bruce Wayne", "telefone": "11 98888-7777" },

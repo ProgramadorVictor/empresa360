@@ -1,6 +1,9 @@
 //Melhor criar um script a parte ao invés de usar no main.js, para que conforme a nossa aplicação vai crescendo, maior o código.
 //Para facilitar a manutenção criamos um outro script para trazer as configurações e conforme o sistema cresce conseguimos organizar.
 
+// $router é o objeto de roteamento da aplicação, no qual temos a configuração total das rotas.!!!!!!!!!!
+// $route é o objeto que contém dados da rota que está ativa no momento.!!!!!!!!!!
+
 import ContratosComponent from './components/vendas/ContratosComponent.vue'
 import LeadsComponent from './components/vendas/LeadsComponent.vue'
 import ServicosComponent from './components/servicos/ServicosComponent.vue'
