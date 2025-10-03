@@ -27,10 +27,10 @@ const routes = [ //Criação de todas as rotas do Vue Router.
             {path: 'vendas', component: VendasComponent, children:[ //localhost:8080/home/vendas
                 {path: 'leads', component: LeadsComponent}, //localhost:8080/home/vendas/leads
                 {path: 'leads/:id', component: LeadComponent}, //localhost:8080/home/vendas/leads/id //Utilizando segmento dinâmico, correspondência dinâmica de rota.
-                {path: 'contratos', component: ContratosComponent}, //localhost:8080/home/vendas/contratos
+                {path: 'contratos', component: ContratosComponent, name: 'contratos'}, //localhost:8080/home/vendas/contratos
                 {path: '', component: VendasPadrao} //localhost:8080/home/vendas/ //Este componente esta se comportando como padrão como se fosse a própria rota pai.
             ]}, 
-            {path: 'servicos', component: ServicosComponent}, //localhost:8080/home/servicos
+            {path: 'servicos', component: ServicosComponent, name: 'servicos'}, //localhost:8080/home/servicos
             {path: 'dashboard', component: DashboardComponent} //localhost:8080/home/dashboard
             //ATENÇÃO: Acima para rotas filhas não é usado a barra isto é IMPORTANTE.
         ]
