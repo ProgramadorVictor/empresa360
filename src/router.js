@@ -7,6 +7,7 @@
 import ContratosComponent from './components/vendas/ContratosComponent.vue'
 import LeadsComponent from './components/vendas/LeadsComponent.vue'
 import ServicosComponent from './components/servicos/ServicosComponent.vue'
+import ServicoComponent from './components/servicos/ServicoComponent.vue'
 import VendasComponent from './components/vendas/VendasComponent.vue'
 import HomeComponent from './views/HomeComponent.vue'
 import LoginComponent from './views/LoginComponent.vue'
@@ -30,7 +31,9 @@ const routes = [ //Criação de todas as rotas do Vue Router.
                 {path: 'contratos', component: ContratosComponent, name: 'contratos'}, //localhost:8080/home/vendas/contratos
                 {path: '', component: VendasPadrao} //localhost:8080/home/vendas/ //Este componente esta se comportando como padrão como se fosse a própria rota pai.
             ]}, 
-            {path: 'servicos', component: ServicosComponent, name: 'servicos'}, //localhost:8080/home/servicos
+            {path: 'servicos', component: ServicosComponent, name: 'servicos', children:[//localhost:8080/home/servicos
+                {path: ':id', component: ServicoComponent, name: 'servico'} //localhost:8080/home/servicos/1
+            ]},
             {path: 'dashboard', component: DashboardComponent} //localhost:8080/home/dashboard
             //ATENÇÃO: Acima para rotas filhas não é usado a barra isto é IMPORTANTE.
         ]
