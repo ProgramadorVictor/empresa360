@@ -8,6 +8,8 @@ import ContratosComponent from './components/vendas/ContratosComponent.vue'
 import LeadsComponent from './components/vendas/LeadsComponent.vue'
 import ServicosComponent from './components/servicos/ServicosComponent.vue'
 import ServicoComponent from './components/servicos/ServicoComponent.vue'
+import OpcoesComponent from './components/servicos/OpcoesComponent.vue'
+import IndicadoresComponent from './components/servicos/IndicadoresComponent.vue'
 import VendasComponent from './components/vendas/VendasComponent.vue'
 import HomeComponent from './views/HomeComponent.vue'
 import LoginComponent from './views/LoginComponent.vue'
@@ -19,6 +21,7 @@ import VendasPadrao from './components/vendas/VendasPadrao.vue'
 
 import { createRouter, createWebHistory } from 'vue-router' //Testando com o createWebHistory
 import DashboardComponent from './components/dashboard/DashboardComponent.vue'
+import DashboardRodape from './components/dashboard/DashboardRodape.vue'
 
 const routes = [ //Criação de todas as rotas do Vue Router.
     {
@@ -32,9 +35,21 @@ const routes = [ //Criação de todas as rotas do Vue Router.
                 {path: '', component: VendasPadrao} //localhost:8080/home/vendas/ //Este componente esta se comportando como padrão como se fosse a própria rota pai.
             ]}, 
             {path: 'servicos', component: ServicosComponent, name: 'servicos', children:[//localhost:8080/home/servicos
-                {path: ':id', component: ServicoComponent, name: 'servico'} //localhost:8080/home/servicos/1
+                {path: ':id', name: 'servico', components:
+                    {
+                        default: ServicoComponent, //Se o atributo não está definido na página, automaticamente o nome é default. Ex: <router-view class="mt-3"/>. Esse por exemplo é default, não sendo necessário explicitar
+                        opcoes: OpcoesComponent, //<router-view name="opcoes"/>
+                        indicadores: IndicadoresComponent //<router-view name="indicadores"/>
+                    }
+                } //localhost:8080/home/servicos/1 
+                //{path: ':id', component: {ServicoComponent}, name: 'servico'}. O código acima era assim, linha 36, trabalhando apenas com um router-view.
             ]},
-            {path: 'dashboard', component: DashboardComponent} //localhost:8080/home/dashboard
+            {path: 'dashboard', components:
+                {
+                    default: DashboardComponent,
+                    rodape: DashboardRodape
+                }
+            } //localhost:8080/home/dashboard
             //ATENÇÃO: Acima para rotas filhas não é usado a barra isto é IMPORTANTE.
         ]
     },

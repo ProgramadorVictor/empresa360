@@ -46,6 +46,10 @@
 
             </div>
         </div>
+
+        <div class="rodape">
+            <router-view name="rodape"/>
+        </div>
     </div>
 </template>
 
@@ -64,6 +68,15 @@
     border-top: none;
     border-right: none;
 }
+
+.rodape{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #ccc;
+}
+
 /*
     .router-link-active, router-link-exact-active //Ambos são usados para estilização da navegação.
     

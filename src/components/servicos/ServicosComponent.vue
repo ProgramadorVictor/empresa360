@@ -15,7 +15,9 @@
             </div>
         </div>
         <!-- Router-view reforçando é muito interessante! -->
-        <router-view class="mt-3"/> <!-- Vai renderizar ServicoComponent, de modo dinâmico -->
+        <router-view class="mt-3"/> <!-- Este é o RouterView default. Vai renderizar ServicoComponent, de modo dinâmico -->
+        <router-view name="opcoes"/> <!-- Este é o RouterView opcoes -->
+        <router-view name="indicadores"/> <!-- Este é o RouterView indicadores -->
     </div>
 </template>
 <script>
