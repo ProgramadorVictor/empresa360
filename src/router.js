@@ -16,6 +16,7 @@ import LoginComponent from './views/LoginComponent.vue'
 import SiteComponent from './views/SiteComponent.vue'
 import LeadComponent from './components/vendas/LeadComponent.vue'
 import VendasPadrao from './components/vendas/VendasPadrao.vue'
+import PaginaNaoEncontrada from './views/PaginaNaoEncontrada.vue'
 
 // import { createRouter, createWebHashHistory } from 'vue-router' //Importando a função createRouter.
 
@@ -77,6 +78,8 @@ const routes = [ //Criação de todas as rotas do Vue Router.
         return {name: 'vendas'}
         }
     },
+    // {path: '*'} //Vue 2 = * //No Vue 2, era definido desta forma para uma rota coringa/catch all
+    {path: '/:catchAll(.*)*', component: PaginaNaoEncontrada} //No Vue 3, Desta maneira é definido a rota coringa/catch all no vue 3. 
 ]
 
 const router = createRouter({
