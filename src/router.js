@@ -26,16 +26,18 @@ import DashboardRodape from './components/dashboard/DashboardRodape.vue'
 const routes = [ //Criação de todas as rotas do Vue Router.
     {
         path: '/home', //Caminho para o componente 'HomeComponent' é acessado por /home. localhost:8080/home
+        alias: '/app', //Apelido para rota home. names != apelidos (são como atalhos)
         component: HomeComponent,
         children:[ //Criação de rotas alinhadas. (Rotas filhas).
-            {path: 'vendas', component: VendasComponent, children:[ //localhost:8080/home/vendas
+            {path: 'vendas', component: VendasComponent, name: 'vendas-erro', children:[ //localhost:8080/home/vendas
                 {path: 'leads', component: LeadsComponent, name: 'leads'}, //localhost:8080/home/vendas/leads
-                {path: 'leads/:id', component: LeadComponent, name: 'lead'}, //localhost:8080/home/vendas/leads/id //Utilizando segmento dinâmico, correspondência dinâmica de rota.
+                {path: 'leads/:id', component: LeadComponent, name: 'lead', alias: ['/l/:id', '/pessoa/:id', '/:id']}, //localhost:8080/home/vendas/leads/id //Utilizando segmento dinâmico, correspondência dinâmica de rota.
+                //Podemos ter um ou mais apelidos para a mesma rota, um exemplo está acima na linha 34, para 'leads/:id'.
                 {path: 'contratos', component: ContratosComponent, name: 'contratos'}, //localhost:8080/home/vendas/contratos
-                {path: '', component: VendasPadrao} //localhost:8080/home/vendas/ //Este componente esta se comportando como padrão como se fosse a própria rota pai.
+                {path: '', component: VendasPadrao, name: 'vendas'} //localhost:8080/home/vendas/ //Este componente esta se comportando como padrão como se fosse a própria rota pai.
             ]}, 
             {path: 'servicos', component: ServicosComponent, name: 'servicos', children:[//localhost:8080/home/servicos
-                {path: ':id', name: 'servico', components:
+                {path: ':id', alias:'/s/:id', name: 'servico', components:
                     {
                         default: ServicoComponent, //Se o atributo não está definido na página, automaticamente o nome é default. Ex: <router-view class="mt-3"/>. Esse por exemplo é default, não sendo necessário explicitar
                         opcoes: OpcoesComponent, //<router-view name="opcoes"/>
@@ -60,7 +62,21 @@ const routes = [ //Criação de todas as rotas do Vue Router.
     {
         path: '/', //localhost:8080/
         component: SiteComponent
-    }
+    },
+    {path: '/redirecionamento-1', redirect: '/home/servicos'},
+    {path: '/redirecionamento-2', redirect: {name: 'leads'}},
+    {path: '/redirecionamento-3', redirect: '/home/vendas'},
+    //OBSERVAÇÃO: Muito importante, em situações onde temos um componente padrão em determinada rota, caso o redirecionamento seja feita pelo o nome da rota precisamos ter uma atenção extra.
+    //MUITO IMPORTANTE, Observe o comportamento de redirecionamento 4 e 5, o 4 não carrega o componente padrão VendasPadrão. Já o 5 carrega o componente.
+    {path: '/redirecionamento-4', redirect: {name: 'vendas-erro'}}, //Isso da problema se colocar diretamente na rota pai.
+    {path: '/redirecionamento-5', redirect: {name: 'vendas'}}, //Foi aplicado name 'vendas' diretamente no componente padrão, para ser visualizado na rota pai.
+    //Para resolução desse problema é necessário que o name usado seja colocado no componente padrão que vai ser renderizado.
+    {path: '/redirecionamento-funcao', redirect: to => { //Podemos usar uma função no redirecionamento.
+        //Podemos programar algo antes do redirecionamento ser efetivado, podemos registrar logs, lógica, validação. E no final temos que da um return.
+        console.log(to);
+        return {name: 'vendas'}
+        }
+    },
 ]
 
 const router = createRouter({
