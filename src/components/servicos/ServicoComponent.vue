@@ -29,7 +29,7 @@
             //to: $route para onde estamos indo
             //from: $route de onde estamos vindo
             //next: faz com que o fluxo de navegação siga em frente, após á aplicação de uma tratativa, ou seja, após uma lógica precisamos recuperar o next, no final.   
-            if(to.params.id != undefined){
+            if(to.params.id != undefined){ //Conteúdo revisado 19.02.2026
                 this.getDadosApi(`http://localhost:3000/servicos/${to.params.id}`)/
                 next()
             }

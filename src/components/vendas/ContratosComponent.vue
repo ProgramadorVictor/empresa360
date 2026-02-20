@@ -14,8 +14,18 @@
             <tbody>
                 <tr v-for="d in dados" :key="d.id">
                     <td>{{ d.id }}</td>
-                    <td>{{ d.leadId }}</td>
-                    <td>{{ d.servicoId }}</td>
+                    <!-- Relacionamentos ínicio -->
+
+                    <!-- 
+                        <td>{{ d.leadId }}</td>
+                        <td>{{ d.servicoId }}</td>
+                    -->
+
+                    <td>{{ d.lead.nome }}</td>
+                    <td>{{ d.servico.servico }}</td>
+                    <!-- A vantagem da utilização de relacionamentos é isso -->
+                    
+                    <!-- Relacionamentos fim -->
                     <td>{{ d.data_inicio }}</td>
                     <td>{{ d.data_fim}}</td>
                     <td>
@@ -36,7 +46,8 @@
         name: 'LeadsComponent',
         mixins: [ApiMixin],
         created(){
-            this.getDadosApi('http://localhost:3000/contratos');
+            this.getDadosApi('http://localhost:3000/contratos?_expand=lead&_expand=servico'); //Consultas com relacionamento usando o json server. Consultas usando QueryParams &
+            //Esta consulta com relacionamentos me lembra muito Laravel, usano HasOne/BelongsTo/HasMany/BelongsToMany.
         }
     }
 </script>
