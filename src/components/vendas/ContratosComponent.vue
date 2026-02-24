@@ -1,6 +1,13 @@
 <template>
     <div>
         <h5>Contratos</h5>
+        <router-link class="btn btn-primary" :to="{name: 'contratos', query: {leadId_like: 1} }">LeadId = 1 </router-link>
+        <router-link class="btn btn-success" :to="{name: 'contratos', query: {leadId_like: 1, servicoId_like: 2} }">LeadId = 1 e ServicoId = 2 </router-link>
+        <!-- Nesse caso no 'router-link' abaixo estamos passando vários query parametros utilizando o name da rota -->
+        <!-- <router-link class="btn btn-primary" :to="{name: 'contratos', query: {leadId_like: 1, name: 'teste', parametro: 2} }">LeadId = 1 </router-link>  -->
+        <!-- Nesse outro do 'router-link' abaixo estamos passando váris query parametros usando o path -->
+        <!-- <router-link class="btn btn-primary" to="/home/vendas/contratos?servicoId_like=2&name=teste&parametro=2">ServiçoId = 1 </router-link> -->
+        <!-- Em ambas a abordagem é diferente. -->
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -45,9 +52,26 @@
     export default {
         name: 'LeadsComponent',
         mixins: [ApiMixin],
+        data: () => ({
+            parametrosDeRelacionamento: '_expand=lead&_expand=servico'
+        }),
         created(){
-            this.getDadosApi('http://localhost:3000/contratos?_expand=lead&_expand=servico'); //Consultas com relacionamento usando o json server. Consultas usando QueryParams &
+            //Queryparams são todos os parametros após de '?'.
+            this.getDadosApi(`http://localhost:3000/contratos?${this.parametrosDeRelacionamento}`); //Consultas com relacionamento usando o json server. Consultas usando QueryParams &
             //Esta consulta com relacionamentos me lembra muito Laravel, usano HasOne/BelongsTo/HasMany/BelongsToMany.
+        },
+        beforeRouteUpdate(to, from, next){
+            if(to.query != undefined){
+                console.log(to.query); //Temos um objeto JavaScript.
+                //Navegadores/Browser não entendem a sintaxe dessa forma. Para eles entenderem temos que mudar a sintaxe usando uma método nativa do Js. URLSearchParams é o método nativo do Js.
+                const queryParams = new URLSearchParams(to.query) //Transformando objeto em sintaxe que os navegadores possam entender. 'leadId_like → "1"' <- Fica dessa forma
+                queryParams.toString(); //Necessário converter o objeto URLSearchParams em string para ficar com a sintaxe que os navegadores entendem. Ficando dessa forma -> ' leadId_like=1 '
+                //  const queryParams = new URLSearchParams(to.query).toString(); É um código mais enxuto melhor para programação do dia a dia.
+                const url = `http://localhost:3000/contratos?${this.parametrosDeRelacionamento}&${queryParams.toString()}`
+                console.log(url);
+                this.getDadosApi(url);
+                next();
+            }
         }
     }
 </script>
