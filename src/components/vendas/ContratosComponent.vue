@@ -56,8 +56,11 @@
             parametrosDeRelacionamento: '_expand=lead&_expand=servico'
         }),
         created(){
-            //Queryparams são todos os parametros após de '?'.
-            this.getDadosApi(`http://localhost:3000/contratos?${this.parametrosDeRelacionamento}`); //Consultas com relacionamento usando o json server. Consultas usando QueryParams &
+            //Resolução de problema ao iniciar a requisição como 'http://localhost:8080/home/vendas/contratos?leadId_like=1&servicoId_like=2' com os query puxando todos os dados, não passando pelo filtro da função beforeRouteUpdate()
+            const queryParams = new URLSearchParams(this.$route.query).toString() //Obtem a query passada pelo objeto route, objeto que tem os dados da rota ativa no momento
+            const url = `http://localhost:3000/contratos?${this.parametrosDeRelacionamento}&${queryParams}`  //QueryParams são todos os parametros após de '?'.
+            this.getDadosApi(url)
+            // this.getDadosApi(`http://localhost:3000/contratos?${this.parametrosDeRelacionamento}`); //Consultas com relacionamento usando o json server. Consultas usando QueryParams &
             //Esta consulta com relacionamentos me lembra muito Laravel, usano HasOne/BelongsTo/HasMany/BelongsToMany.
         },
         beforeRouteUpdate(to, from, next){
