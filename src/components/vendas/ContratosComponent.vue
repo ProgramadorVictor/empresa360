@@ -85,34 +85,27 @@
         }),
         methods:{
             pesquisar(){
-                Object.keys(this.formPesquisa).forEach(chave => {
-                    if(this.formPesquisa[chave] == '') delete this.formPesquisa[chave]
-                })
-
-                const queryParams = new URLSearchParams(this.formPesquisa).toString();
-                console.log(queryParams)
-                const url = `http://localhost:3000/contratos?${this.parametrosDeRelacionamento}&${queryParams}`
-                this.getDadosApi(url)
+                const url = `http://localhost:3000/contratos?${this.parametrosDeRelacionamento}`
+                this.getDadosApi(url, this.formPesquisa) //Otimização de ApiMixin
             }
         },
         created(){
             //Resolução de problema ao iniciar a requisição como 'http://localhost:8080/home/vendas/contratos?leadId_like=1&servicoId_like=2' com os query puxando todos os dados, não passando pelo filtro da função beforeRouteUpdate()
-            const queryParams = new URLSearchParams(this.$route.query).toString() //Obtem a query passada pelo objeto route, objeto que tem os dados da rota ativa no momento
-            const url = `http://localhost:3000/contratos?${this.parametrosDeRelacionamento}&${queryParams}`  //QueryParams são todos os parametros após de '?'.
-            this.getDadosApi(url)
+            // const queryParams = new URLSearchParams().toString() //Obtem a query passada pelo objeto route, objeto que tem os dados da rota ativa no momento
+            const url = `http://localhost:3000/contratos?${this.parametrosDeRelacionamento}`
+            this.getDadosApi(url, this.$route.query) //Otimização de ApiMixin
             // this.getDadosApi(`http://localhost:3000/contratos?${this.parametrosDeRelacionamento}`); //Consultas com relacionamento usando o json server. Consultas usando QueryParams &
             //Esta consulta com relacionamentos me lembra muito Laravel, usano HasOne/BelongsTo/HasMany/BelongsToMany.
         },
         beforeRouteUpdate(to, from, next){
             if(to.query != undefined){
-                console.log(to.query); //Temos um objeto JavaScript.
+                // console.log(to.query); //Temos um objeto JavaScript.
                 //Navegadores/Browser não entendem a sintaxe dessa forma. Para eles entenderem temos que mudar a sintaxe usando uma método nativa do Js. URLSearchParams é o método nativo do Js.
-                const queryParams = new URLSearchParams(to.query) //Transformando objeto em sintaxe que os navegadores possam entender. 'leadId_like → "1"' <- Fica dessa forma
-                queryParams.toString(); //Necessário converter o objeto URLSearchParams em string para ficar com a sintaxe que os navegadores entendem. Ficando dessa forma -> ' leadId_like=1 '
+                // const queryParams = new URLSearchParams(to.query) //Transformando objeto em sintaxe que os navegadores possam entender. 'leadId_like → "1"' <- Fica dessa forma
+                // queryParams.toString(); //Necessário converter o objeto URLSearchParams em string para ficar com a sintaxe que os navegadores entendem. Ficando dessa forma -> ' leadId_like=1 '
                 //  const queryParams = new URLSearchParams(to.query).toString(); É um código mais enxuto melhor para programação do dia a dia.
-                const url = `http://localhost:3000/contratos?${this.parametrosDeRelacionamento}&${queryParams.toString()}`
-                console.log(url);
-                this.getDadosApi(url);
+                const url = `http://localhost:3000/contratos?${this.parametrosDeRelacionamento}`
+                this.getDadosApi(url, to.query);
                 next();
             }
         }
