@@ -11,9 +11,12 @@
     export default {
         name: 'ServicoComponent',
         mixins: [apiMixin],
+        props: ['id'],
         created(){
-            console.log(this.$route); //Objeto de configuração da rota. Verificando os dados da rota ativada no momento
-            this.getDadosApi(`http://localhost:3000/servicos/${this.$route.params.id}`);
+            // console.log('Serviços', this.$route.params.id)
+            // console.log(this.$route); //Objeto que contém os dados da rota ativa no momento.
+            console.log(this.$props); //Recebendo parametros via props
+            this.getDadosApi(`http://localhost:3000/servicos/${this.id}`); //Acessando parametros via props ao invés de route.
         },
         /*
         watch:{ //Monitoramente de alteração de valores

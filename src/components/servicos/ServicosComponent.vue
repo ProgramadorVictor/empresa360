@@ -23,7 +23,7 @@
 <script>
     import ApiMixin from '@/mixins/ApiMixin.js';
     export default {
-        name: 'LeadsComponent',
+        name: 'ServicosComponent',
         mixins: [ApiMixin],
         created(){
             this.getDadosApi('http://localhost:3000/servicos');

@@ -32,13 +32,32 @@ const routes = [ //Criação de todas as rotas do Vue Router.
         children:[ //Criação de rotas alinhadas. (Rotas filhas).
             {path: 'vendas', component: VendasComponent, name: 'vendas-erro', children:[ //localhost:8080/home/vendas
                 {path: 'leads', component: LeadsComponent, name: 'leads'}, //localhost:8080/home/vendas/leads
-                {path: 'leads/:id', component: LeadComponent, name: 'lead', alias: ['/l/:id', '/pessoa/:id', '/:id']}, //localhost:8080/home/vendas/leads/id //Utilizando segmento dinâmico, correspondência dinâmica de rota.
+                {
+                    path: 'leads/:id/:outroParametro',  //localhost:8080/home/vendas/leads/id //Utilizando segmento dinâmico, correspondência dinâmica de rota.
+                    props: true, //Parametros via props
+                    component: LeadComponent,
+                    name: 'lead',
+                    alias: [
+                        '/l/:id/:outroParametro',
+                        '/pessoa/:id/:outroParametro',
+                        '/:id/:outroParametro'
+                    ]
+                },
                 //Podemos ter um ou mais apelidos para a mesma rota, um exemplo está acima na linha 34, para 'leads/:id'.
                 {path: 'contratos', component: ContratosComponent, name: 'contratos'}, //localhost:8080/home/vendas/contratos
                 {path: '', component: VendasPadrao, name: 'vendas'} //localhost:8080/home/vendas/ //Este componente esta se comportando como padrão como se fosse a própria rota pai.
             ]}, 
             {path: 'servicos', component: ServicosComponent, name: 'servicos', children:[//localhost:8080/home/servicos
-                {path: ':id', alias:'/s/:id', name: 'servico', components:
+                {
+                    path: ':id',
+                    props: { //Trabalhando com multiplos router views, precisamos trabalhar com chave e valor
+                        default: true, //IRÁ RECEBER VALORES VIA PROPS
+                        indicadores: true, //NÃO IRÁ RECEBER VALORES VIA PROPS, CASO SEJA FALSE
+                        opcoes: true, //IRÁ RECEBER VALORES VIA PROPS
+                    },
+                    alias:'/s/:id',
+                    name: 'servico',
+                    components:
                     {
                         default: ServicoComponent, //Se o atributo não está definido na página, automaticamente o nome é default. Ex: <router-view class="mt-3"/>. Esse por exemplo é default, não sendo necessário explicitar
                         opcoes: OpcoesComponent, //<router-view name="opcoes"/>

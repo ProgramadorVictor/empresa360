@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-auto d-flex justify-content-between">
-            <button type="button" class="btn btn-warning" @click="$router.push({name: 'leads'})">Voltar</button>
+            <button type="button" class="btn btn-warning" @click="$router.push({name: 'leads'})">Voltar</button> <!-- Faz com que o usuário vá para a rota correspondente  -->
             <button type="button" class="btn btn-primary">Atualizar</button>
         </div>
     </div>
@@ -28,10 +28,11 @@
 <script>
     import apiMixin from '@/mixins/ApiMixin.js'; //Chamando o objeto mixin, com a requisição de api, configurada no objeto .js
     export default {
+        props: ['id', 'outroParametro'], //Parametros via props, router.js
         mixins: [apiMixin],
         created(){
             console.log(this.$route); //Objeto de configuração da rota. Verificando os dados da rota ativada no momento
-            this.getDadosApi(`http://localhost:3000/leads/${this.$route.params.id}`);
+            this.getDadosApi(`http://localhost:3000/leads/${this.id}`);
         },
     }
 </script>
