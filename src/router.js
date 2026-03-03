@@ -34,7 +34,11 @@ const routes = [ //Criação de todas as rotas do Vue Router.
                 {path: 'leads', component: LeadsComponent, name: 'leads'}, //localhost:8080/home/vendas/leads
                 {
                     path: 'leads/:id/:outroParametro',  //localhost:8080/home/vendas/leads/id //Utilizando segmento dinâmico, correspondência dinâmica de rota.
-                    props: true, //Parametros via props
+                    props: { //Parametros via props
+                        id: 5, //Sobrepondo os parametros da rota da aplicação
+                        outroParametro: 'pt-br'  //Sobrepondo os parametros da rota da aplicação
+                        //São parametros estaticos que vão substituir o parametro da rota.
+                    }, 
                     component: LeadComponent,
                     name: 'lead',
                     alias: [
