@@ -9,27 +9,22 @@
                 <div class="row">
                     <div class="col-6">
                         <label class="form-label">ID Contrato:</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" v-model="formPesquisa.id_like">
                     </div>
                     <div class="col-6">
                         <label class="form-label">Data início:</label>
                         <div class="input-group">
-                            <input type="date" class="form-control">
-                            <input type="date" class="form-control">
+                            <input type="date" class="form-control" v-model="formPesquisa.data_inicio_gte">
+                            <input type="date" class="form-control" v-model="formPesquisa.data_fim_lte">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                <button type="button" class="btn btn-primary">Pesquisar</button>
+                <button type="button" class="btn btn-primary" @click="pesquisar()">Pesquisar</button>
             </div>
         </div>
-
-
-
-
-
-
+        <!--  -->
 
         <!-- Nesse caso no 'router-link' abaixo estamos passando vários query parametros utilizando o name da rota -->
         <!-- <router-link class="btn btn-primary" :to="{name: 'contratos', query: {leadId_like: 1, name: 'teste', parametro: 2} }">LeadId = 1 </router-link>  -->
@@ -81,8 +76,25 @@
         name: 'LeadsComponent',
         mixins: [ApiMixin],
         data: () => ({
-            parametrosDeRelacionamento: '_expand=lead&_expand=servico'
+            parametrosDeRelacionamento: '_expand=lead&_expand=servico',
+            formPesquisa: {
+                id_like: '',
+                data_inicio_gte: '',
+                data_fim_lte: ''
+            }
         }),
+        methods:{
+            pesquisar(){
+                Object.keys(this.formPesquisa).forEach(chave => {
+                    if(this.formPesquisa[chave] == '') delete this.formPesquisa[chave]
+                })
+
+                const queryParams = new URLSearchParams(this.formPesquisa).toString();
+                console.log(queryParams)
+                const url = `http://localhost:3000/contratos?${this.parametrosDeRelacionamento}&${queryParams}`
+                this.getDadosApi(url)
+            }
+        },
         created(){
             //Resolução de problema ao iniciar a requisição como 'http://localhost:8080/home/vendas/contratos?leadId_like=1&servicoId_like=2' com os query puxando todos os dados, não passando pelo filtro da função beforeRouteUpdate()
             const queryParams = new URLSearchParams(this.$route.query).toString() //Obtem a query passada pelo objeto route, objeto que tem os dados da rota ativa no momento
