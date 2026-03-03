@@ -31,7 +31,6 @@
         props: ['id', 'outroParametro'], //Parametros via props, router.js
         mixins: [apiMixin],
         created(){
-            console.log(this.$props)
             console.log(this.$route); //Objeto de configuração da rota. Verificando os dados da rota ativada no momento
             this.getDadosApi(`http://localhost:3000/leads/${this.id}`);
         },

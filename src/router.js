@@ -34,11 +34,17 @@ const routes = [ //Criação de todas as rotas do Vue Router.
                 {path: 'leads', component: LeadsComponent, name: 'leads'}, //localhost:8080/home/vendas/leads
                 {
                     path: 'leads/:id/:outroParametro',  //localhost:8080/home/vendas/leads/id //Utilizando segmento dinâmico, correspondência dinâmica de rota.
-                    props: { //Parametros via props
-                        id: 5, //Sobrepondo os parametros da rota da aplicação
-                        outroParametro: 'pt-br'  //Sobrepondo os parametros da rota da aplicação
-                        //São parametros estaticos que vão substituir o parametro da rota.
-                    }, 
+                    props: true,
+                    // props: route => { //Retornar um objeto coms as props que seram enviadas para o componente por meio de uma função podemos tratar e validar as queryparametros.
+                    //     //Lógica da função, para definir as props para o componente roteado.
+                    //     console.log('Rota ativa', route)
+                        
+                    //     let teste = route.query.idioma ? route.query.idioma : route.params.outroParametro; //Um exemplo de lógica para functions mode.
+
+                    //     return {
+                    //         //Retorno que vai ser atribuido o objeto props.
+                    //     }
+                    // },
                     component: LeadComponent,
                     name: 'lead',
                     alias: [
