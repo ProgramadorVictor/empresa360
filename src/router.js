@@ -123,6 +123,13 @@ const router = createRouter({
     //Ao invés de usar 'routes: routes', pode ser usado 'routes'
 })
 
+router.beforeEach((to, from) => {
+    console.log('Origem:', from)
+    console.log('Destino:', to)
+    console.log("Método é executado antes da rota destino.")
+
+})
+
 export default router //exportando o objeto 'router'
 /*
     Navegação History (CreateWebHashHistory): Todas as requisições feitas por esse modo, passam obrigatoriamente pelo index.html, 
