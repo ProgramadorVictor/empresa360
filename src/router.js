@@ -27,6 +27,7 @@ import DashboardRodape from './components/dashboard/DashboardRodape.vue'
 const routes = [ //Criação de todas as rotas do Vue Router.
     {
         path: '/home', //Caminho para o componente 'HomeComponent' é acessado por /home. localhost:8080/home
+        meta: { requerAutorizacao: true },
         alias: '/app', //Apelido para rota home. names != apelidos (são como atalhos)
         component: HomeComponent,
         children:[ //Criação de rotas alinhadas. (Rotas filhas).
@@ -87,11 +88,13 @@ const routes = [ //Criação de todas as rotas do Vue Router.
     },
     {
         path: '/login', //localhost:8080/login
-        component: LoginComponent
+        component: LoginComponent,
+        meta: { requerAutorizacao: false}
     },
     {
         path: '/', //localhost:8080/
-        component: SiteComponent
+        component: SiteComponent,
+        meta: { requerAutorizacao: false }
     },
     {path: '/redirecionamento-1', redirect: '/home/servicos'},
     {path: '/redirecionamento-2', redirect: {name: 'leads'}},
@@ -124,10 +127,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-    console.log('Origem:', from)
-    console.log('Destino:', to)
-    console.log("Método é executado antes da rota destino.")
-
+    if(to.meta.requerAutorizacao){
+        console.log('Validar acesso')
+    } else{
+        onsole.log('Apenas seguir a validação')
+    }
 })
 
 export default router //exportando o objeto 'router'
