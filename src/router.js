@@ -32,7 +32,16 @@ const routes = [ //Criação de todas as rotas do Vue Router.
         component: HomeComponent,
         children:[ //Criação de rotas alinhadas. (Rotas filhas).
             {path: 'vendas', component: VendasComponent, name: 'vendas-erro', children:[ //localhost:8080/home/vendas
-                {path: 'leads', component: LeadsComponent, name: 'leads'}, //localhost:8080/home/vendas/leads
+                {
+                    path: 'leads', //localhost:8080/home/vendas/leads
+                    component: LeadsComponent,
+                    name: 'leads',
+                    beforeEnter(to, from, next){ //É análoga a beforeEach, porém é definida no objeto de configuração da rota local, ao invés de ser global igual beforeEach
+                        //Podemos verificar se o usuário tem permissão de carregar a rota.
+                        console.log('Guarda de rota local beforeEnter')
+                        console.log(to, from, next)
+                    }
+                }, 
                 {
                     path: 'leads/:id/:outroParametro',  //localhost:8080/home/vendas/leads/id //Utilizando segmento dinâmico, correspondência dinâmica de rota.
                     props: true,
@@ -126,12 +135,14 @@ const router = createRouter({
     //Ao invés de usar 'routes: routes', pode ser usado 'routes'
 })
 
-router.beforeEach((to, from) => {
-    if(to.meta.requerAutorizacao){
-        console.log('Validar acesso')
-    } else{
-        onsole.log('Apenas seguir a validação')
-    }
+router.beforeEach((to, from) => { //Guarda de rota global que é executada antes da navegação ser realizada
+    console.log('Guarda global beforeEach')
+    console.log(to, from)
+})
+
+router.afterEach((to, from) => { //Guarda de rota global que é executada após navegação ser realizada.
+    console.log('Guarda global afterEach')
+    console.log(to, from)
 })
 
 export default router //exportando o objeto 'router'
